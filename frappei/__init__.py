@@ -48,6 +48,8 @@ def frappei_whitelist(
             app_apis["app"] = app_name
             app_apis["apis"] = {"base": {}}
 
+        if sub_group not in app_apis["apis"]:	
+            app_apis["apis"][sub_group] = {}
         if sub_group in app_apis["apis"]:
             app_apis["apis"][sub_group][api_name] = fn
 
@@ -58,7 +60,6 @@ def frappei_whitelist(
 
         if allow_guest:
             frappei_guest_methods.append(api_path)
-        print(frappei_whitelisted)
         return method or fn
 
     return innerfn
