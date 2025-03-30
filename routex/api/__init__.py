@@ -12,24 +12,20 @@ import os
 
 
 def handle_api_call(route: str):
-        
-    #try:
-    
-        route = route.split("/")
 
-        if len(route) == 2:
-            find_function_in_app(route[0])
-            app_route, api_name = route
-            method = routex.frappei_whitelisted[app_route]["apis"]["base"][api_name]
-            return frappe.call(method, **frappe.form_dict)
-            
-        if len(route) == 3:
-            find_function_in_app(route[0])
-            app_route, sub_group, api_name = route
-            method = routex.frappei_whitelisted[app_route]["apis"][sub_group][api_name]
-            return frappe.call(method, **frappe.form_dict)
-        
-        #raise DoesNotExistError
+    route = route.split("/")
+
+    if len(route) == 2:
+        find_function_in_app(route[0])
+        app_route, api_name = route
+        method = routex.frappei_whitelisted[app_route]["apis"]["base"][api_name]
+        return frappe.call(method, **frappe.form_dict)
+
+    if len(route) == 3:
+        find_function_in_app(route[0])
+        app_route, sub_group, api_name = route
+        method = routex.frappei_whitelisted[app_route]["apis"][sub_group][api_name]
+        return frappe.call(method, **frappe.form_dict)
 
 
 url_rules = [
@@ -61,10 +57,11 @@ def handle(request: Request):
             frappe.response["message"] = data
         return build_response("json")
 
+
 def find_function_in_app(app_name):
     """
     Recursively searches for a function in any module inside the given app.
-    
+
     :param app_name: The root package name (e.g., "frappe")
     :param function_name: The function name to search for
     :return: The function object if found, else None
@@ -74,11 +71,13 @@ def find_function_in_app(app_name):
         package = importlib.import_module(app_name)
     except ModuleNotFoundError:
         raise DoesNotExistError
-    
+
     package = importlib.import_module(app_name)
     package_path = os.path.dirname(package.__file__)
 
-    for _, module_name, _ in pkgutil.walk_packages([package_path], prefix=f"{app_name}."):
+    for _, module_name, _ in pkgutil.walk_packages(
+        [package_path], prefix=f"{app_name}."
+    ):
         try:
             module = importlib.import_module(module_name)
         except:
