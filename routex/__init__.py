@@ -6,10 +6,6 @@ __version__ = "0.0.1"
 __title__ = "routeX"
 
 routex_whitelisted = {}
-routex_guest_methods = []
-routex_xss_safe_methods = []
-routex_allowed_http_methods_for_whitelisted_func = {}
-allowed_methods = ["GET", "POST", "PUT", "DELETE"]
 
 
 def routex_whitelist(
@@ -22,10 +18,10 @@ def routex_whitelist(
     if not methods:
         methods = ["GET", "POST", "PUT", "DELETE"]
 
-    def innerfn(fn):
+    def innerfn(fn: callable):
         from frappe.utils.typing_validations import validate_argument_types
 
-        global routex_whitelisted, routex_guest_methods, routex_xss_safe_methods, routex_allowed_http_methods_for_whitelisted_func
+        global routex_whitelisted
 
         in_request_or_test = (
             lambda: getattr(frappe.local, "request", None) or frappe.local.flags.in_test
@@ -52,19 +48,20 @@ def routex_whitelist(
 
         if sub_group not in app_apis["apis"]:
             app_apis["apis"][sub_group] = {}
+
         if sub_group in app_apis["apis"]:
-            app_apis["apis"][sub_group][api_name] = fn
+            app_apis["apis"][sub_group][api_name] = {}
+
+        app_apis["apis"][sub_group][api_name] = frappe._dict(
+            {
+                "method": f"{fn.__module__}.{fn.__name__}",
+                "allowed_http_method": methods,
+                "allow_guest": allow_guest,
+                "xss_safe": xss_safe,
+            }
+        )
 
         routex_whitelisted[app_name] = app_apis
-
-        api_path = f"/{app_name}/{sub_group}/{api_name}"
-        routex_allowed_http_methods_for_whitelisted_func[api_path] = methods
-
-        if allow_guest:
-            routex_guest_methods.append(api_path)
-
-            if xss_safe:
-                routex_xss_safe_methods.add(api_path)
         return method or fn
 
     return innerfn

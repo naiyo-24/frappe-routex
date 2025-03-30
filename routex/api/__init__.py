@@ -6,9 +6,7 @@ import frappe
 import routex
 from frappe.handler import build_response
 from frappe.api import API_URL_MAP
-import importlib
-import pkgutil
-import os
+from routex.utils import load_module_for_app, is_valid_http_method, is_whitelisted
 
 
 def handle_api_call(route: str):
@@ -19,15 +17,20 @@ def handle_api_call(route: str):
         raise DoesNotExistError
     load_module_for_app(route[0])
 
-    if len(route) == 2:
-        app_route, api_name = route
-        method = routex.routex_whitelisted[app_route]["apis"]["base"][api_name]
-        return frappe.call(method, **frappe.form_dict)
-
-    if len(route) == 3:
+    sub_group = "base"
+    if route_length == 3:
         app_route, sub_group, api_name = route
-        method = routex.routex_whitelisted[app_route]["apis"][sub_group][api_name]
-        return frappe.call(method, **frappe.form_dict)
+
+    if route_length == 2:
+        app_route, api_name = route
+
+    try:
+        api = routex.routex_whitelisted[app_route]["apis"][sub_group][api_name]
+        is_valid_http_method(api)
+        is_whitelisted(api)
+        return frappe.call(api.method, **frappe.form_dict)
+    except:
+        raise DoesNotExistError
 
 
 url_rules = [
@@ -58,26 +61,3 @@ def handle(request: Request):
         if data is not None:
             frappe.response["message"] = data
         return build_response("json")
-
-
-def load_module_for_app(app_name):
-    """
-    Recursively searches for a function in any module inside the given app.
-
-    :param app_name: The root package name (e.g., "frappe")
-    :return: The function object if found, else None
-    """
-
-    try:
-        package = importlib.import_module(app_name)
-    except ModuleNotFoundError:
-        raise DoesNotExistError
-
-    package = importlib.import_module(app_name)
-    package_path = os.path.dirname(package.__file__)
-
-    for _, module_name, _ in pkgutil.walk_packages(
-        [package_path], prefix=f"{app_name}."
-    ):
-
-        importlib.import_module(module_name)

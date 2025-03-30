@@ -62,6 +62,6 @@ def is_whitelisted(api):
     if is_guest and not api.xss_safe:
         # strictly sanitize form_dict
         # escapes html characters like <> except for predefined tags like a, b, ul etc.
-        for key, value in form_dict.items():
+        for key, value in frappe.form_dict.items():
             if isinstance(value, str):
-                form_dict[key] = sanitize_html(value)
+                frappe.form_dict[key] = sanitize_html(value)
