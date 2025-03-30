@@ -1,5 +1,5 @@
-
-def get_route_from_app_name(app_name:str)->str:
-    return app_name.lower().replace(" ", "-")
+from collections.abc import Callable
 
 
+def get_base_package_name(func: Callable) -> str:
+    return func.__module__.split(".")[0]
