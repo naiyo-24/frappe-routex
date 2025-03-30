@@ -15,17 +15,18 @@ def handle_api_call(route: str):
     route_length = len(route)
     if route_length < 2 or route_length > 3:
         raise DoesNotExistError
-    load_module_for_app(route[0])
 
     sub_group = "base"
     if route_length == 3:
-        app_route, sub_group, api_name = route
+        app_name, sub_group, api_name = route
 
     if route_length == 2:
-        app_route, api_name = route
+        app_name, api_name = route
+
+    load_module_for_app(app_name)
 
     try:
-        api = routex.routex_whitelisted[app_route]["apis"][sub_group][api_name]
+        api = routex.routex_whitelisted[app_name]["apis"][sub_group][api_name]
         is_valid_http_method(api)
         is_whitelisted(api)
         return frappe.call(api.method, **frappe.form_dict)

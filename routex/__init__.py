@@ -67,6 +67,11 @@ def routex_whitelist(
     return innerfn
 
 
+@routex_whitelist("ding")
+def ding():
+    return "dong"
+
+
 # Monkey patch
 from frappe import api
 
