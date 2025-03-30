@@ -1,7 +1,7 @@
 [project]
-name = "frappei"
+name = "routeX"
 authors = [
-    { name = "Niraj Gautam & Vishal Kumar", email = "app@frappei.io"}
+    { name = "Niraj Gautam & Vishal Kumar", email = "app@routex.io"}
 ]
 description = "Custom API for Frappe"
 requires-python = ">=3.10"

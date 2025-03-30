@@ -1,8 +1,8 @@
-app_name = "frappei"
-app_title = "Frappei"
+app_name = "routex"
+app_title = "routeX"
 app_publisher = "Niraj Gautam & Vishal Kumar"
 app_description = "Custom API for Frappe"
-app_email = "app@frappei.io"
+app_email = "app@routex.io"
 app_license = "mit"
 
 # Apps
@@ -13,11 +13,11 @@ app_license = "mit"
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
 # 	{
-# 		"name": "frappei",
-# 		"logo": "/assets/frappei/logo.png",
-# 		"title": "Frappei",
-# 		"route": "/frappei",
-# 		"has_permission": "frappei.api.permission.has_app_permission"
+# 		"name": "routex",
+# 		"logo": "/assets/routex/logo.png",
+# 		"title": "routeX",
+# 		"route": "/routex",
+# 		"has_permission": "routex.api.permission.has_app_permission"
 # 	}
 # ]
 
@@ -25,15 +25,15 @@ app_license = "mit"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/frappei/css/frappei.css"
-# app_include_js = "/assets/frappei/js/frappei.js"
+# app_include_css = "/assets/routex/css/routex.css"
+# app_include_js = "/assets/routex/js/routex.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/frappei/css/frappei.css"
-# web_include_js = "/assets/frappei/js/frappei.js"
+# web_include_css = "/assets/routex/css/routex.css"
+# web_include_js = "/assets/routex/js/routex.js"
 
 # include custom scss in every website theme (without file extension ".scss")
-# website_theme_scss = "frappei/public/scss/website"
+# website_theme_scss = "routex/public/scss/website"
 
 # include js, css files in header of web form
 # webform_include_js = {"doctype": "public/js/doctype.js"}
@@ -51,7 +51,7 @@ app_license = "mit"
 # Svg Icons
 # ------------------
 # include app icons in desk
-# app_include_icons = "frappei/public/icons.svg"
+# app_include_icons = "routex/public/icons.svg"
 
 # Home Pages
 # ----------
@@ -75,43 +75,43 @@ app_license = "mit"
 
 # add methods and filters to jinja environment
 # jinja = {
-# 	"methods": "frappei.utils.jinja_methods",
-# 	"filters": "frappei.utils.jinja_filters"
+# 	"methods": "routex.utils.jinja_methods",
+# 	"filters": "routex.utils.jinja_filters"
 # }
 
 # Installation
 # ------------
 
-# before_install = "frappei.install.before_install"
-# after_install = "frappei.install.after_install"
+# before_install = "routex.install.before_install"
+# after_install = "routex.install.after_install"
 
 # Uninstallation
 # ------------
 
-# before_uninstall = "frappei.uninstall.before_uninstall"
-# after_uninstall = "frappei.uninstall.after_uninstall"
+# before_uninstall = "routex.uninstall.before_uninstall"
+# after_uninstall = "routex.uninstall.after_uninstall"
 
 # Integration Setup
 # ------------------
 # To set up dependencies/integrations with other apps
 # Name of the app being installed is passed as an argument
 
-# before_app_install = "frappei.utils.before_app_install"
-# after_app_install = "frappei.utils.after_app_install"
+# before_app_install = "routex.utils.before_app_install"
+# after_app_install = "routex.utils.after_app_install"
 
 # Integration Cleanup
 # -------------------
 # To clean up dependencies/integrations with other apps
 # Name of the app being uninstalled is passed as an argument
 
-# before_app_uninstall = "frappei.utils.before_app_uninstall"
-# after_app_uninstall = "frappei.utils.after_app_uninstall"
+# before_app_uninstall = "routex.utils.before_app_uninstall"
+# after_app_uninstall = "routex.utils.after_app_uninstall"
 
 # Desk Notifications
 # ------------------
 # See frappe.core.notifications.get_notification_config
 
-# notification_config = "frappei.notifications.get_notification_config"
+# notification_config = "routex.notifications.get_notification_config"
 
 # Permissions
 # -----------
@@ -150,39 +150,39 @@ app_license = "mit"
 
 # scheduler_events = {
 # 	"all": [
-# 		"frappei.tasks.all"
+# 		"routex.tasks.all"
 # 	],
 # 	"daily": [
-# 		"frappei.tasks.daily"
+# 		"routex.tasks.daily"
 # 	],
 # 	"hourly": [
-# 		"frappei.tasks.hourly"
+# 		"routex.tasks.hourly"
 # 	],
 # 	"weekly": [
-# 		"frappei.tasks.weekly"
+# 		"routex.tasks.weekly"
 # 	],
 # 	"monthly": [
-# 		"frappei.tasks.monthly"
+# 		"routex.tasks.monthly"
 # 	],
 # }
 
 # Testing
 # -------
 
-# before_tests = "frappei.install.before_tests"
+# before_tests = "routex.install.before_tests"
 
 # Overriding Methods
 # ------------------------------
 #
 # override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "frappei.event.get_events"
+# 	"frappe.desk.doctype.event.event.get_events": "routex.event.get_events"
 # }
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
 # override_doctype_dashboards = {
-# 	"Task": "frappei.task.get_dashboard_data"
+# 	"Task": "routex.task.get_dashboard_data"
 # }
 
 # exempt linked doctypes from being automatically cancelled
@@ -196,13 +196,13 @@ app_license = "mit"
 
 # Request Events
 # ----------------
-# before_request = ["frappei.utils.before_request"]
-# after_request = ["frappei.utils.after_request"]
+# before_request = ["routex.utils.before_request"]
+# after_request = ["routex.utils.after_request"]
 
 # Job Events
 # ----------
-# before_job = ["frappei.utils.before_job"]
-# after_job = ["frappei.utils.after_job"]
+# before_job = ["routex.utils.before_job"]
+# after_job = ["routex.utils.after_job"]
 
 # User Data Protection
 # --------------------
@@ -232,7 +232,7 @@ app_license = "mit"
 # --------------------------------
 
 # auth_hooks = [
-# 	"frappei.auth.validate"
+# 	"routex.auth.validate"
 # ]
 
 # Automatically update python controller files with type annotations for this app.

@@ -3,7 +3,7 @@ from werkzeug.wrappers import Request, Response
 from werkzeug.exceptions import NotFound
 from frappe.exceptions import DoesNotExistError
 import frappe
-import frappei
+import routex
 from frappe.handler import build_response
 from frappe.api import API_URL_MAP
 import importlib
@@ -20,13 +20,13 @@ def handle_api_call(route: str):
         if len(route) == 2:
             find_function_in_app(route[0])
             app_route, api_name = route
-            method = frappei.frappei_whitelisted[app_route]["apis"]["base"][api_name]
+            method = routex.frappei_whitelisted[app_route]["apis"]["base"][api_name]
             return frappe.call(method, **frappe.form_dict)
             
         if len(route) == 3:
             find_function_in_app(route[0])
             app_route, sub_group, api_name = route
-            method = frappei.frappei_whitelisted[app_route]["apis"][sub_group][api_name]
+            method = routex.frappei_whitelisted[app_route]["apis"][sub_group][api_name]
             return frappe.call(method, **frappe.form_dict)
         
         #raise DoesNotExistError

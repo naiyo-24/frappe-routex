@@ -1,6 +1,6 @@
-from frappei.utils import get_route_from_app_name
+from routex.utils import get_route_from_app_name
 import frappe
-from frappei.api import handle
+from routex.api import handle
 
 __version__ = "0.0.1"
 __title__ = "Frappei"
