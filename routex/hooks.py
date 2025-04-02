@@ -3,7 +3,7 @@ app_title = "routeX"
 app_publisher = "Niraj Gautam & Vishal Kumar"
 app_description = "Custom API for Frappe"
 app_email = "app@routex.io"
-app_license = "mit"
+app_license = "AGPL-3.0"
 
 # Apps
 # ------------------
