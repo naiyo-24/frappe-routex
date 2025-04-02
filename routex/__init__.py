@@ -2,6 +2,9 @@ from routex.utils import get_base_package_name
 import frappe
 from routex.api import handle
 
+# nosemgrep
+from frappe import api
+
 __version__ = "0.0.1"
 __title__ = "routeX"
 
@@ -24,8 +27,8 @@ def routex_whitelist(
         global routex_whitelisted
 
         in_request_or_test = (
-            lambda: getattr(frappe.local, "request", None) or frappe.local.flags.in_test
-        )  # noqa: E731
+            lambda: getattr(frappe.local, "request", None) or frappe.local.flags.in_test  # noqa: E731
+        )
 
         if hasattr(fn, "__func__"):
             method = validate_argument_types(fn, apply_condition=in_request_or_test)
@@ -72,7 +75,5 @@ def ding():
     return "dong"
 
 
-# Monkey patch
-from frappe import api
-
+# nosemgrep
 api.handle = handle
