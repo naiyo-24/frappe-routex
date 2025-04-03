@@ -9,7 +9,7 @@
 
 _RouteX is a Frappe app that enhances API routing by introducing RESTful endpoints alongside Frappe’s default dotted path approach. It provides a more intuitive and flexible way to define and manage API routes in Frappe applications._
 
-[Quick Start](#quick-start) • [Examples](#-examples) • [Support](#-support)
+[Quick Start](#-quick-start) • [Examples](#-examples) • [Support](#-support)
 
 </div>
 
