@@ -7,7 +7,7 @@
 
 ### Rest API compatible routes for Frappe
 
-*RouteX is a Frappe app that enhances API routing by introducing RESTful endpoints alongside Frappe’s default dotted path approach. It provides a more intuitive and flexible way to define and manage API routes in Frappe applications.*
+_RouteX is a Frappe app that enhances API routing by introducing RESTful endpoints alongside Frappe’s default dotted path approach. It provides a more intuitive and flexible way to define and manage API routes in Frappe applications._
 
 [Quick Start](#quick-start) • [Examples](#-examples) • [Support](#-support)
 
@@ -26,7 +26,7 @@
 
 </td>
 <td style="border: none; vertical-align: top; width: 33%;">
-<h3>Groupted Routes</h3>
+<h3>Grouped Routes</h3>
 
 - Organize multiple related API endpoints under a single namespace.
 - Helps maintain cleaner, more structured API management.
@@ -57,6 +57,7 @@ bench install-app routex
 ## 📚 Examples
 
 ### Usage
+
 ```python
 # Use routex_whitelist function to add your route, In this example we are are defineing a route name "ding" that will be accessible via /api/[app-name]/ding
 @routex_whitelist("ding")
@@ -79,6 +80,7 @@ def ping():
 - 🌟 Star us on GitHub!
 
 ## 👏 authors
+
 [@elifvish](https://github.com/elifvish)
 [@niraj2477](https://gihub.com/niraj2477)
 [@dhsathiya](https://github.com/dhsathiya)
