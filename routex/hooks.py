@@ -1,8 +1,8 @@
 app_name = "routex"
-app_title = "routeX"
+app_title = "RouteX"
 app_publisher = "Niraj Gautam & Vishal Kumar"
-app_description = "Custom API for Frappe"
-app_email = "app@routex.io"
+app_description = "Restfull API for Frappe"
+app_email = "elifvish@gmail.com"
 app_license = "AGPL-3.0"
 
 # Apps
@@ -241,4 +241,3 @@ app_license = "AGPL-3.0"
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-

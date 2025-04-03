@@ -1,10 +1,10 @@
 [project]
 name = "routeX"
 authors = [
-    { name = "Niraj Gautam & Vishal Kumar", email = "app@routex.io"}
+    { name = "Niraj Gautam & Vishal Kumar", email = "elifvish@gmail.com"}
 ]
-description = "Custom API for Frappe"
-requires-python = ">=3.10"
+description = "Restfull API for Frappe"
+requires-python = ">=3.11"
 readme = "README.md"
 dynamic = ["version"]
 dependencies = [
