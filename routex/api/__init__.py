@@ -1,16 +1,16 @@
-from werkzeug.routing import Rule, Submount, Map
-from werkzeug.wrappers import Request, Response
-from werkzeug.exceptions import NotFound
-from frappe.exceptions import DoesNotExistError
 import frappe
-import routex
-from frappe.handler import build_response
 from frappe.api import API_URL_MAP
-from routex.utils import load_module_for_app, is_valid_http_method, is_whitelisted
+from frappe.exceptions import DoesNotExistError
+from frappe.handler import build_response
+from werkzeug.exceptions import NotFound
+from werkzeug.routing import Map, Rule, Submount
+from werkzeug.wrappers import Request, Response
+
+import routex
+from routex.utils import is_valid_http_method, is_whitelisted, load_module_for_app
 
 
 def handle_api_call(route: str):
-
     route = route.split("/")
     route_length = len(route)
     if route_length < 2 or route_length > 3:
@@ -30,7 +30,7 @@ def handle_api_call(route: str):
         is_valid_http_method(api)
         is_whitelisted(api)
         return frappe.call(api.method, **frappe.form_dict)
-    except:
+    except DoesNotExistError:
         raise DoesNotExistError
 
 
