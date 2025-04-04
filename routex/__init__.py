@@ -1,8 +1,5 @@
 import frappe
 
-# nosemgrep
-from frappe import api
-
 from routex.api import handle
 from routex.utils import get_base_package_name
 
@@ -76,5 +73,12 @@ def foo():
     return "bar"
 
 
-# nosemgrep
-api.handle = handle
+def monkey_patch():
+    # nosemgrep
+    from frappe import api
+
+    # nosemgrep
+    api.handle = handle
+
+
+monkey_patch()
