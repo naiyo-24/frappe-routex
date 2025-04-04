@@ -7,9 +7,10 @@ def get_base_package_name(func: Callable) -> str:
 
 def load_module_for_app(app_name):
     import importlib
-    from frappe import DoesNotExistError
     import os
     import pkgutil
+
+    from frappe import DoesNotExistError
 
     """
     Recursively searches for a function in any module inside the given app.
@@ -29,7 +30,6 @@ def load_module_for_app(app_name):
     for _, module_name, _ in pkgutil.walk_packages(
         [package_path], prefix=f"{app_name}."
     ):
-
         importlib.import_module(module_name)
 
 
@@ -46,9 +46,9 @@ def is_valid_http_method(api):
 
 
 def is_whitelisted(api):
-    from frappe.utils import sanitize_html
     import frappe
-    from frappe.utils import bold
+    from frappe import bold
+    from frappe.utils import sanitize_html
 
     is_guest = frappe.session.user == "Guest"
     if is_guest and not api.allow_guest:

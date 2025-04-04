@@ -1,9 +1,10 @@
-from routex.utils import get_base_package_name
 import frappe
-from routex.api import handle
 
 # nosemgrep
 from frappe import api
+
+from routex.api import handle
+from routex.utils import get_base_package_name
 
 __version__ = "0.0.1"
 __title__ = "routeX"
@@ -26,7 +27,7 @@ def routex_whitelist(
 
         global routex_whitelisted
 
-        in_request_or_test = (
+        in_request_or_test = (  # noqa: E731
             lambda: getattr(frappe.local, "request", None) or frappe.local.flags.in_test  # noqa: E731
         )
 
@@ -70,9 +71,9 @@ def routex_whitelist(
     return innerfn
 
 
-@routex_whitelist("ding")
-def ding():
-    return "dong"
+@routex_whitelist("foo")
+def foo():
+    return "bar"
 
 
 # nosemgrep
