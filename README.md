@@ -1,6 +1,7 @@
 <div align="center">
 
-# 🚀 RouteX
+<img src="./assets/logo_small.png" alt="RouteX Logo" style="width:150px;"/>
+<br>
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: AGPL3.0](https://img.shields.io/badge/license-AGPL--v3-blue)](https://opensource.org/license/agpl-v3)
