@@ -31,37 +31,3 @@ def load_module_for_app(app_name):
         [package_path], prefix=f"{app_name}."
     ):
         importlib.import_module(module_name)
-
-
-def is_valid_http_method(api):
-    import frappe
-
-    if frappe.flags.in_safe_exec:
-        return
-
-    http_method = frappe.local.request.method
-
-    if http_method not in api.allowed_http_method:
-        frappe.throw_permission_error()
-
-
-def is_whitelisted(api):
-    import frappe
-    from frappe import bold
-    from frappe.utils import sanitize_html
-
-    is_guest = frappe.session.user == "Guest"
-    if is_guest and not api.allow_guest:
-        summary = frappe._("You are not permitted to access this resource.")
-        detail = frappe._("Function {0} is not whitelisted.").format(
-            bold(f"{api.method}")
-        )
-        msg = f"<details><summary>{summary}</summary>{detail}</details>"
-        frappe.throw(msg, PermissionError, title=frappe._("Method Not Allowed"))
-
-    if is_guest and not api.xss_safe:
-        # strictly sanitize form_dict
-        # escapes html characters like <> except for predefined tags like a, b, ul etc.
-        for key, value in frappe.form_dict.items():
-            if isinstance(value, str):
-                frappe.form_dict[key] = sanitize_html(value)

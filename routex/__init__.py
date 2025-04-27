@@ -1,8 +1,5 @@
 import frappe
 
-# nosemgrep
-from frappe import api
-
 from routex.api import handle
 from routex.utils import get_base_package_name
 
@@ -13,7 +10,7 @@ routex_whitelisted = {}
 
 
 def routex_whitelist(
-    api_name: str,
+    route: str,
     group: str | None = None,
     allow_guest: bool = False,
     xss_safe: bool = False,
@@ -38,43 +35,27 @@ def routex_whitelist(
             fn = validate_argument_types(fn, apply_condition=in_request_or_test)
 
         app_name = get_base_package_name(fn)
-        sub_group = group
         method = None
 
-        if not sub_group:
-            sub_group = "base"
+        method_path = app_name
+        if group:
+            method_path += group
 
-        app_apis = routex_whitelisted.get(app_name, {})
+        method_path += route
 
-        if not app_apis:
-            app_apis["app"] = app_name
-            app_apis["apis"] = {"base": {}}
+        routex_whitelisted[method_path] = f"{fn.__module__}.{fn.__name__}"
 
-        if sub_group not in app_apis["apis"]:
-            app_apis["apis"][sub_group] = {}
-
-        if sub_group in app_apis["apis"]:
-            app_apis["apis"][sub_group][api_name] = {}
-
-        app_apis["apis"][sub_group][api_name] = frappe._dict(
-            {
-                "method": f"{fn.__module__}.{fn.__name__}",
-                "allowed_http_method": methods,
-                "allow_guest": allow_guest,
-                "xss_safe": xss_safe,
-            }
-        )
-
-        routex_whitelisted[app_name] = app_apis
+        fn = frappe.whitelist(
+            allow_guest=allow_guest, xss_safe=xss_safe, methods=methods
+        )(fn)
         return method or fn
 
     return innerfn
 
 
-@routex_whitelist("foo")
+@routex_whitelist("/foo/test")
 def foo():
     return "bar"
 
 
-# nosemgrep
-api.handle = handle
+frappe.api.handle = handle
