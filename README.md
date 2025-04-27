@@ -61,7 +61,7 @@ bench install-app routex
 
 ```python
 # Use routex_whitelist function to add your route, In this example we are are defineing a route name "ding" that will be accessible via /api/[app-name]/ding
-@routex_whitelist("ding")
+@routex_whitelist("/ding")
 def ding():
     return "dong"
 
@@ -69,7 +69,7 @@ def ding():
 
 ```python
 # use routex_whitelist function to add your group name and route name, In this example we are defining a group name "ping" and route name "pong" that will be accessible via /api/[app-name]/ping/pong
-@routex_whitelist("ping", "pong")
+@routex_whitelist("/ping/1", "group")
 def ping():
     return "dong"
 ```

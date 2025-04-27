@@ -53,7 +53,7 @@ def routex_whitelist(
     return innerfn
 
 
-@routex_whitelist("/foo/test")
+@routex_whitelist("/foo")
 def foo():
     return "bar"
 
