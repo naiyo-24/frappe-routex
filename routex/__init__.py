@@ -1,10 +1,10 @@
 import frappe
 
 from routex.api import handle
-from routex.utils import get_base_package_name
+from routex.utils import get_base_package_name, format_route
 
 __version__ = "0.0.1"
-__title__ = "routeX"
+__title__ = "RouteX"
 
 routex_whitelisted = {}
 
@@ -16,6 +16,25 @@ def routex_whitelist(
     xss_safe: bool = False,
     methods: list = ["GET", "POST"],
 ):
+    """
+    Decorator to add REST API like route names to frappe's whitelist methods.
+    This allows you to call the function using a URL like /api/<app_name>/<route>.
+    Args:
+        route (str): The route to whitelist the function for. Will be formatted as /api/<app_name>/<route>
+        group (str | None, optional): The group to whitelist the function for. Creates path like /api/<app_name>/<group>/<route>. Defaults to None.
+        allow_guest (bool, optional): Whether to allow guest access to the function. Defaults to False.
+        xss_safe (bool, optional): Whether to make the function XSS safe. Defaults to False.
+        methods (list, optional): The HTTP methods to allow for the function. Defaults to ["GET", "POST"].
+
+    Returns:
+        callable: The decorated function with whitelist and routing capabilities added.
+
+    Example:
+        @routex_whitelist("users", group="v1", methods=["GET"])
+        def get_users():
+            # This function will be accessible at /api/myapp/v1/users
+            return {"users": [...]}
+    """
     if not methods:
         methods = ["GET", "POST", "PUT", "DELETE"]
 
@@ -39,9 +58,9 @@ def routex_whitelist(
 
         method_path = app_name
         if group:
-            method_path += group
+            method_path += format_route(group, prefix_slash=True)
 
-        method_path += route
+        method_path += format_route(route, prefix_slash=True)
 
         routex_whitelisted[method_path] = f"{fn.__module__}.{fn.__name__}"
 
@@ -56,6 +75,14 @@ def routex_whitelist(
 @routex_whitelist("/foo")
 def foo():
     return "bar"
+
+
+@routex_whitelist("get_routes")
+def get_routes():
+    """
+    Returns the list of all whitelisted routes.
+    """
+    return routex_whitelisted
 
 
 frappe.api.handle = handle

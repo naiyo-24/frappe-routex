@@ -67,12 +67,6 @@ def ding():
 
 ```
 
-```python
-# use routex_whitelist function to add your group name and route name, In this example we are defining a group name "ping" and route name "pong" that will be accessible via /api/[app-name]/ping/pong
-@routex_whitelist("/ping/1", "group")
-def ping():
-    return "dong"
-```
 
 ## 🤝 Support
 

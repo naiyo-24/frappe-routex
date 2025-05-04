@@ -2,7 +2,7 @@ from collections.abc import Callable
 
 
 def get_base_package_name(func: Callable) -> str:
-    return func.__module__.split(".")[0]
+    return format_route(func.__module__.split(".")[0])
 
 
 def load_module_for_app(app_name):
@@ -31,3 +31,9 @@ def load_module_for_app(app_name):
         [package_path], prefix=f"{app_name}."
     ):
         importlib.import_module(module_name)
+
+
+def format_route(route: str, prefix_slash: bool = False) -> str:
+    if prefix_slash and not route.startswith("/"):
+        route = "/" + route
+    return route.replace("_", "-")
