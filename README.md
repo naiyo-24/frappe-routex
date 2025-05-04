@@ -61,9 +61,9 @@ bench install-app routex
 
 ```python
 # Use routex_whitelist function to add your route, In this example we are are defineing a route name "ding" that will be accessible via /api/[app-name]/ding
-@routex_whitelist("/ding")
-def ding():
-    return "dong"
+@routex_whitelist("/foo")
+def foo():
+    return "bar"
 
 ```
 

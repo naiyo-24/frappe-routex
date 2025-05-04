@@ -77,12 +77,4 @@ def foo():
     return "bar"
 
 
-@routex_whitelist("get_routes")
-def get_routes():
-    """
-    Returns the list of all whitelisted routes.
-    """
-    return routex_whitelisted
-
-
 frappe.api.handle = handle
