@@ -1,5 +1,5 @@
 [project]
-name = "RouteX"
+name = "routex"
 authors = [
     { name = "Niraj Gautam & Vishal Kumar", email = "elifvish@gmail.com"}
 ]
