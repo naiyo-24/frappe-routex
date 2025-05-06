@@ -60,13 +60,21 @@ bench install-app routex
 ### Usage
 
 ```python
-# Use routex_whitelist function to add your route, In this example we are are defineing a route name "ding" that will be accessible via /api/[app-name]/ding
+# Use routex_whitelist function to add your route, In this example we are are defineing a route name "foo" that will be accessible via /api/[app-name]/foo
 @routex_whitelist("/foo")
 def foo():
     return "bar"
 
 ```
+**GROUPED ROUTE**
+```python
+# For grouping the routes we have parameter which can be passed, which will group the routes. eg. /api/[app-name]/group/foo
+@routex_whitelist("/foo",group="/group")
+def foo():
+    return "bar"
+```
 
+`routex_whitelist` does supports all the params supported by the `whitelist`, since using routex method will automatically registers the api with `frappe.whitelist`.
 
 ## 🤝 Support
 
