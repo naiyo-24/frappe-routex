@@ -18,7 +18,7 @@ def handle_api_call(route: str):
         method = routex.routex_whitelisted.get(route, None)
         if not method:
             raise DoesNotExistError
-        return frappe.call(method, **frappe.form_dict)
+        return frappe.handler.execute_cmd(method)
     except DoesNotExistError:
         raise DoesNotExistError
 
