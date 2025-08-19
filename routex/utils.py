@@ -37,3 +37,7 @@ def format_route(route: str, prefix_slash: bool = False) -> str:
     if prefix_slash and not route.startswith("/"):
         route = "/" + route
     return route.replace("_", "-")
+
+
+def parse_route(route: str) -> str:
+    return route.replace("-", "_")

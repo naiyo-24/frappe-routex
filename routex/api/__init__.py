@@ -1,19 +1,19 @@
 import frappe
+from frappe.api import handle as _handle
 from frappe.exceptions import DoesNotExistError
 from frappe.handler import build_response
 from werkzeug.exceptions import NotFound
 from werkzeug.routing import Map, Rule, Submount
 from werkzeug.wrappers import Request, Response
-from frappe.api import handle as _handle
 
-from routex.utils import load_module_for_app
 import routex
+from routex.utils import load_module_for_app, parse_route
 
 
 def handle_api_call(route: str):
     app_name = route.split("/")[0]
     if route not in routex.routex_whitelisted:
-        load_module_for_app(app_name)
+        load_module_for_app(parse_route(app_name))
     try:
         method = routex.routex_whitelisted.get(route, None)
         if not method:
